@@ -5,7 +5,7 @@ An easy file / folder picker dialog fragment which is easily to implement. Nothi
 
 ### Installing
 Use Gradle:
-
+```compile 'com.kingfisherphuoc:easy-file-folder-picker-dialog:1.2'```
 ### How to use?
 Look at this code below? Is this easy? Nothing special is require. 
 <br>You just need using `FilePickerDialogFragment.Builder()` to create new instance of `FilePickerDialogFragment` and show it whenever you want. We handle runtime permission for you when showing the dialog. 
