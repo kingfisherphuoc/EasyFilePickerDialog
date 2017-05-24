@@ -8,8 +8,8 @@ Use Gradle:
 
 ### How to use?
 Look at this code below? Is this easy? Nothing special is require. 
-You just need using `FilePickerDialogFragment.Builder()` to create new instance of `FilePickerDialogFragment` and show it whenever you want. We handle runtime permission for you when showing the dialog. 
-The `DialogConfig` is optional. You can declare it or not, it's up to you.
+<br>You just need using `FilePickerDialogFragment.Builder()` to create new instance of `FilePickerDialogFragment` and show it whenever you want. We handle runtime permission for you when showing the dialog. 
+<br>The `DialogConfig` is optional. You can declare it or not, it's up to you.
 ```java
  DialogConfig dialogConfig = new DialogConfig.Builder()
                 .enableMultipleSelect(true) // default is false
@@ -35,7 +35,7 @@ new FilePickerDialogFragment.Builder()
 If I have free time, I will make this dialog more customizable:
 1. Customizable dialog theme
 2. Customizable dialog UI (recycler view's row, button, toolbar...)
-Feel free to create an issue if you had any problem.
+<br>Feel free to create an issue if you had any problem.
 
 ### License
 Copyright 2017 Doan Hong Phuoc
