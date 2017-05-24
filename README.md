@@ -14,6 +14,7 @@ Look at this code below? Is this easy? Nothing special is require.
  DialogConfig dialogConfig = new DialogConfig.Builder()
                 .enableMultipleSelect(true) // default is false
                 .enableFolderSelect(true) // default is false
+                .initialDirectory(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "Android") // default is sdcard
                 .supportFiles(new SupportFile(".3gpp", R.drawable.ic_audio), new SupportFile(".mp3", 0), new SupportFile(".pdf", R.drawable.ic_pdf)) // default is showing all file types.
                 .build();
 
@@ -35,7 +36,8 @@ new FilePickerDialogFragment.Builder()
 If I have free time, I will make this dialog more customizable:
 1. Customizable dialog theme
 2. Customizable dialog UI (recycler view's row, button, toolbar...)
-<br>Feel free to create an issue if you had any problem.
+<br>
+Feel free to create an issue if you had any problem.
 
 ### License
 Copyright 2017 Doan Hong Phuoc
