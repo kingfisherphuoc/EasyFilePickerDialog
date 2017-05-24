@@ -1,17 +1,19 @@
 package easyfilepickerdialog.kingfisher.com.library.view;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -22,11 +24,15 @@ import easyfilepickerdialog.kingfisher.com.library.adapter.BaseViewHolder;
 import easyfilepickerdialog.kingfisher.com.library.adapter.FileAdapter;
 import easyfilepickerdialog.kingfisher.com.library.model.DialogConfig;
 import easyfilepickerdialog.kingfisher.com.library.presenter.FilePickerPresenter;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.OnPermissionDenied;
+import permissions.dispatcher.RuntimePermissions;
 
 /**
  * Created by kingfisher on 5/22/17.
  */
 
+@RuntimePermissions
 public class FilePickerDialogFragment extends BaseNoFrameDialogFragment implements FilePickerView,
         BaseViewHolder.OnViewHolderClickListener, View.OnClickListener {
 
@@ -84,11 +90,27 @@ public class FilePickerDialogFragment extends BaseNoFrameDialogFragment implemen
         if (filePickerPresenter == null) {
             filePickerPresenter = new FilePickerPresenter(this);
             filePickerPresenter.setDialogConfig(dialogConfig);
-            filePickerPresenter.loadFolder(Environment.getExternalStorageDirectory().getAbsolutePath());
+
+            FilePickerDialogFragmentPermissionsDispatcher.loadFolderWithCheck(this, Environment.getExternalStorageDirectory().getAbsolutePath());
         }
         return view;
     }
 
+    @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+    void loadFolder(String path) {
+        filePickerPresenter.loadFolder(path);
+    }
+
+    @OnPermissionDenied(Manifest.permission.READ_EXTERNAL_STORAGE)
+    void onPermissionDenied() {
+        Toast.makeText(getContext(), "Cannot load sdcard if you do not accept the required permission!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        FilePickerDialogFragmentPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
 
     @Override
     public void showFolderContent(String path, List<File> files) {
@@ -112,12 +134,13 @@ public class FilePickerDialogFragment extends BaseNoFrameDialogFragment implemen
 
     @Override
     public void onItemClick(int position) {
-        Log.e(TAG, "item clicked: " + fileAdapter.getItem(position).getName());
+//        Log.e(TAG, "item clicked: " + fileAdapter.getItem(position).getName());
         if (position == 0) {
             // click on Up folder
             filePickerPresenter.loadUpFolder();
         } else {
-            filePickerPresenter.loadFolder(fileAdapter.getItem(position).getAbsolutePath());
+//            loadFolder(fileAdapter.getItem(position).getAbsolutePath());
+            FilePickerDialogFragmentPermissionsDispatcher.loadFolderWithCheck(this, fileAdapter.getItem(position).getAbsolutePath());
         }
     }
 
