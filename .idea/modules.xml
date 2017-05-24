@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/EasyFilePickerDialog.iml" filepath="$PROJECT_DIR$/EasyFilePickerDialog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EasyFilePickerDialogGit.iml" filepath="$PROJECT_DIR$/EasyFilePickerDialogGit.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
     </modules>
