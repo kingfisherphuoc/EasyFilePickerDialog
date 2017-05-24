@@ -7,6 +7,6 @@ import java.util.List;
  * Created by kingfisher on 5/22/17.
  */
 
-public interface DialogAudioPickerView {
-    void showFolderContent(List<File> files);
+public interface FilePickerView {
+    void showFolderContent(String path, List<File> files);
 }

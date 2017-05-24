@@ -68,9 +68,10 @@ public abstract class BaseRecyclerArrayAdapter<T> extends RecyclerView.Adapter<B
      * @param datas
      */
     public void addItem(Collection<T> datas) {
+        int count = list.size();
         list.addAll(datas);
         backupList.addAll(datas);
-        notifyItemRangeInserted(0, datas.size());
+        notifyItemRangeInserted(count, datas.size());
     }
 
     /**
