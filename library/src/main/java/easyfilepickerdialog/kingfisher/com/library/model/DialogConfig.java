@@ -15,6 +15,7 @@ public class DialogConfig {
     private List<SupportFile> supportFiles;
     private boolean enableMultipleSelect = DEFAULT_DISABLE_MULTIPLE_FILE_SELECT;
     private boolean enableFolderSelect = DEFAULT_DISABLE_FOLDER_SELECT;
+    private String initialDirectory;
 
     public List<SupportFile> getSupportFiles() {
         return supportFiles;
@@ -28,10 +29,15 @@ public class DialogConfig {
         return enableFolderSelect;
     }
 
+    public String getInitialDirectory() {
+        return this.initialDirectory;
+    }
+
     private DialogConfig(Builder builder) {
         supportFiles = builder.supportFiles;
         enableMultipleSelect = builder.multipleSelect;
         this.enableFolderSelect = builder.folderSelect;
+        this.initialDirectory = builder.initDirectory;
     }
 
 
@@ -39,6 +45,7 @@ public class DialogConfig {
         private List<SupportFile> supportFiles;
         private boolean multipleSelect;
         private boolean folderSelect;
+        private String initDirectory;
 
         public Builder() {
         }
@@ -86,6 +93,17 @@ public class DialogConfig {
          */
         public Builder enableFolderSelect(boolean enableFolderSelect) {
             this.folderSelect = enableFolderSelect;
+            return this;
+        }
+
+        /**
+         * Set the initial directory
+         *
+         * @param initDirectory
+         * @return
+         */
+        public Builder initialDirectory(String initDirectory) {
+            this.initDirectory = initDirectory;
             return this;
         }
 

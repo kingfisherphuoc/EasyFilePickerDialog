@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,7 +87,14 @@ public class FilePickerDialogFragment extends BaseNoFrameDialogFragment implemen
             filePickerPresenter = new FilePickerPresenter(this);
             filePickerPresenter.setDialogConfig(dialogConfig);
 
-            FilePickerDialogFragmentPermissionsDispatcher.loadFolderWithCheck(this, Environment.getExternalStorageDirectory().getAbsolutePath());
+            // load with the initial path
+            String initPath = null;
+            if (dialogConfig != null && !TextUtils.isEmpty(dialogConfig.getInitialDirectory())) {
+                initPath = dialogConfig.getInitialDirectory();
+            } else {
+                initPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+            }
+            FilePickerDialogFragmentPermissionsDispatcher.loadFolderWithCheck(this, initPath);
         }
         return view;
     }

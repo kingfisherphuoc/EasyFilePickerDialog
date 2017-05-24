@@ -1,6 +1,7 @@
 package kingfisher.com.easyfilepickerdialog;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,7 @@ import java.io.File;
 import java.util.List;
 
 import easyfilepickerdialog.kingfisher.com.library.model.DialogConfig;
+import easyfilepickerdialog.kingfisher.com.library.model.SupportFile;
 import easyfilepickerdialog.kingfisher.com.library.view.FilePickerDialogFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
         DialogConfig dialogConfig = new DialogConfig.Builder()
                 .enableMultipleSelect(true)
                 .enableFolderSelect(true)
-//                .supportFiles(new SupportFile(".3gpp", R.drawable.ic_audio), new SupportFile(".mp3", 0), new SupportFile(".pdf", R.drawable.ic_pdf))
+                .initialDirectory(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "Android")
+                .supportFiles(new SupportFile(".3gpp", R.drawable.ic_audio), new SupportFile(".mp3", 0), new SupportFile(".pdf", R.drawable.ic_pdf))
                 .build();
 
         new FilePickerDialogFragment.Builder()

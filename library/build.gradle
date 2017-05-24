@@ -40,4 +40,5 @@ dependencies {
         exclude module: "support-v13"
     }
     annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.4.0'
+
 }
