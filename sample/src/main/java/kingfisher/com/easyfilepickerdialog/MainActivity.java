@@ -29,9 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
         new FilePickerDialogFragment.Builder()
                 .configs(dialogConfig)
-                .onAudioFilesSelected(new FilePickerDialogFragment.OnAudioFilesSelected() {
+                .onFilesSelected(new FilePickerDialogFragment.OnFilesSelectedListener() {
                     @Override
-                    public void onAudioSelected(List<File> list) {
+                    public void onFileSelected(List<File> list) {
                         Log.e(TAG, "total Selected file: " + list.size());
                         for (File file : list) {
                             Log.e(TAG, "Selected file: " + file.getAbsolutePath());

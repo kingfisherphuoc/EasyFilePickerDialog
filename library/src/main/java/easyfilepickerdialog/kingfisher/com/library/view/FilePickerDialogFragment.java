@@ -44,20 +44,15 @@ public class FilePickerDialogFragment extends BaseNoFrameDialogFragment implemen
 
     FileAdapter fileAdapter;
     FilePickerPresenter filePickerPresenter;
-    OnAudioFilesSelected onAudioFilesSelected;
+    OnFilesSelectedListener onFilesSelectedListener;
     DialogConfig dialogConfig;
 
 
     private static FilePickerDialogFragment newInstance(Builder builder) {
         FilePickerDialogFragment filePickerDialogFragment = new FilePickerDialogFragment();
-        filePickerDialogFragment.onAudioFilesSelected = builder.onAudioFilesSelected;
+        filePickerDialogFragment.onFilesSelectedListener = builder.onFilesSelectedListener;
         filePickerDialogFragment.dialogConfig = builder.dialogConfig;
         return filePickerDialogFragment;
-    }
-
-    public FilePickerDialogFragment audioFIleSelected(OnAudioFilesSelected onAudioFilesSelected) {
-        this.onAudioFilesSelected = onAudioFilesSelected;
-        return this;
     }
 
     @Nullable
@@ -124,8 +119,8 @@ public class FilePickerDialogFragment extends BaseNoFrameDialogFragment implemen
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.btnDone) {
-            if (onAudioFilesSelected != null) {
-                onAudioFilesSelected.onAudioSelected(fileAdapter.getCheckedFiles());
+            if (onFilesSelectedListener != null) {
+                onFilesSelectedListener.onFileSelected(fileAdapter.getCheckedFiles());
             }
             dismiss();
         }
@@ -155,20 +150,20 @@ public class FilePickerDialogFragment extends BaseNoFrameDialogFragment implemen
         getDialog().getWindow().setAttributes(p);
     }
 
-    public interface OnAudioFilesSelected {
-        void onAudioSelected(List<File> list);
+    public interface OnFilesSelectedListener {
+        void onFileSelected(List<File> list);
     }
 
 
     public static final class Builder {
-        private OnAudioFilesSelected onAudioFilesSelected;
+        private OnFilesSelectedListener onFilesSelectedListener;
         private DialogConfig dialogConfig;
 
         public Builder() {
         }
 
-        public Builder onAudioFilesSelected(OnAudioFilesSelected onAudioFilesSelected) {
-            this.onAudioFilesSelected = onAudioFilesSelected;
+        public Builder onFilesSelected(OnFilesSelectedListener onFilesSelectedListener) {
+            this.onFilesSelectedListener = onFilesSelectedListener;
             return this;
         }
 
