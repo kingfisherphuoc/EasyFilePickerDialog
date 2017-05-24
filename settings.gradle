@@ -1,1 +1,1 @@
-include ':sample', ':library'
+include ':sample', ':easy-file-folder-picker-dialog'
