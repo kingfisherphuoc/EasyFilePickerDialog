@@ -25,5 +25,7 @@
     <CheckBox
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:button="@drawable/check_box_selector" />
 </LinearLayout>
