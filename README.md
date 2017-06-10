@@ -5,7 +5,9 @@ An easy file / folder picker dialog fragment which is easily to implement. Nothi
 
 ### Installing
 Use Gradle:
-```compile 'com.kingfisherphuoc:easy-file-folder-picker-dialog:1.2'```
+```gradle
+compile 'com.kingfisherphuoc:easy-file-folder-picker-dialog:1.3'
+```
 ### How to use?
 Look at this code below? Is this easy? Nothing special is require. 
 <br>You just need using `FilePickerDialogFragment.Builder()` to create new instance of `FilePickerDialogFragment` and show it whenever you want. We handle runtime permission for you when showing the dialog. 
@@ -27,6 +29,12 @@ new FilePickerDialogFragment.Builder()
                         for (File file : list) {
                             Log.e(TAG, "Selected file: " + file.getAbsolutePath());
                         }
+                    }
+                })
+                .onFolderLoadListener(new FilePickerDialogFragment.OnFolderLoadListener() {
+                    @Override
+                    public void onLoadFailed(String path) {
+                        //Could not access folder because of user permissions, sdcard is not readable...
                     }
                 })
                 .build()
