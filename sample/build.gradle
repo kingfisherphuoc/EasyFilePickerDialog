@@ -29,5 +29,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile project(':easy-file-folder-picker-dialog')
+//    compile 'com.kingfisherphuoc:easy-file-folder-picker-dialog:1.4'
 
 }

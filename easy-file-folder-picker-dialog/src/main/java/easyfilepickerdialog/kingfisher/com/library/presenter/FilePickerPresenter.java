@@ -32,34 +32,37 @@ public class FilePickerPresenter {
         this.dialogConfig = dialogConfig;
     }
 
-    public void loadFolder(String folderPath) {
+    public boolean loadFolder(String folderPath) {
         File file = new File(folderPath);
         if (file.exists() && file.isDirectory()) {
             this.folderPath = folderPath;
-
-            List<File> list = new ArrayList<>();
-//            Collections.addAll(list, file.listFiles());
-            for (File fileInFolder : file.listFiles()) {
-                if (fileInFolder.isDirectory() || isFileInFilterList(fileInFolder)) {
-                    list.add(fileInFolder);
-                }
-            }
-
-            Collections.sort(list, new Comparator<File>() {
-                @Override
-                public int compare(File file, File t1) {
-                    if (file.isDirectory() && !t1.isDirectory()) {
-                        return -1;
-                    } else if (!file.isDirectory() && t1.isDirectory()) {
-                        return 1;
-                    } else {
-                        return file.getName().compareTo(t1.getName());
+            if (file.listFiles() == null) {
+                return false;
+            } else {
+                List<File> list = new ArrayList<>();
+                for (File fileInFolder : file.listFiles()) {
+                    if (fileInFolder.isDirectory() || isFileInFilterList(fileInFolder)) {
+                        list.add(fileInFolder);
                     }
                 }
-            });
-            list.add(0, new File("Up"));
-            dialogAudioPickerView.showFolderContent(folderPath, list);
+
+                Collections.sort(list, new Comparator<File>() {
+                    @Override
+                    public int compare(File file, File t1) {
+                        if (file.isDirectory() && !t1.isDirectory()) {
+                            return -1;
+                        } else if (!file.isDirectory() && t1.isDirectory()) {
+                            return 1;
+                        } else {
+                            return file.getName().compareTo(t1.getName());
+                        }
+                    }
+                });
+                list.add(0, new File("Up"));
+                dialogAudioPickerView.showFolderContent(folderPath, list);
+            }
         }
+        return true;
     }
 
     public void loadUpFolder() {
@@ -67,8 +70,6 @@ public class FilePickerPresenter {
             File file = new File(folderPath);
             if (file.exists() && file.getParentFile() != null) {
                 loadFolder(file.getParentFile().getAbsolutePath());
-            } else {
-//                Timber.e("No up folder");
             }
         }
     }

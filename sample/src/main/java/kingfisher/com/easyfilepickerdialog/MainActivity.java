@@ -44,4 +44,25 @@ public class MainActivity extends AppCompatActivity {
                 .build()
                 .show(getSupportFragmentManager(), null);
     }
+
+    public void showCustomDialog(View v) {
+        DialogConfig dialogConfig = new DialogConfig.Builder()
+                .enableMultipleSelect(true)
+                .enableFolderSelect(true)
+                .initialDirectory(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "Android")
+                .supportFiles(new SupportFile(".3gpp", R.drawable.ic_audio), new SupportFile(".mp3", 0), new SupportFile(".pdf", R.drawable.ic_pdf))
+                .build();
+
+        MyExampleCustomDialog myExampleCustomDialog = MyExampleCustomDialog.newInstance(new FilePickerDialogFragment.OnFilesSelectedListener() {
+            @Override
+            public void onFileSelected(List<File> list) {
+                Log.e(TAG, "total Selected file: " + list.size());
+                for (File file : list) {
+                    Log.e(TAG, "Selected file: " + file.getAbsolutePath());
+                }
+            }
+        }, dialogConfig);
+
+        myExampleCustomDialog.show(getSupportFragmentManager(), null);
+    }
 }

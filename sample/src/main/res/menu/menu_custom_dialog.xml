@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.MainActivity">
+
+
+    <item
+        android:id="@+id/actionDone"
+        android:title="DONE"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/actionList"
+        android:title="List Item"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/actionGrid"
+        android:title="Grid Item"
+        app:showAsAction="never" />
+</menu>

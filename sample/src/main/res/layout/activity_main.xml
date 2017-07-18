@@ -15,4 +15,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btnShowCustomDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="showCustomDialog"
+        android:text="Show Custom Dialog"
+        app:layout_constraintLeft_toLeftOf="@id/btnShow"
+        app:layout_constraintRight_toRightOf="@id/btnShow"
+        app:layout_constraintTop_toBottomOf="@id/btnShow" />
+
 </android.support.constraint.ConstraintLayout>

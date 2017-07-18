@@ -28,9 +28,15 @@ public class FileAdapter extends BaseRecyclerArrayAdapter<File> {
     private DialogConfig dialogConfig;
     private HashMap<String, Integer> mapFileIcons;
 
-    public FileAdapter(List<File> list, DialogConfig dialogConfig,
+    private int ivIconId;
+    private int tvNameId;
+    private int cbId;
+
+    public FileAdapter(List<File> list,
+                       int layoutId,
+                       DialogConfig dialogConfig,
                        BaseViewHolder.OnViewHolderClickListener onViewHolderClickListener) {
-        super(list, R.layout.item_file_picker);
+        super(list, layoutId);
         this.onViewHolderClickListener = onViewHolderClickListener;
         this.dialogConfig = dialogConfig;
 
@@ -42,6 +48,22 @@ public class FileAdapter extends BaseRecyclerArrayAdapter<File> {
             }
         }
     }
+
+    public FileAdapter setIconId(int iconId) {
+        ivIconId = iconId;
+        return this;
+    }
+
+    public FileAdapter setNameId(int id) {
+        this.tvNameId = id;
+        return this;
+    }
+
+    public FileAdapter setCheckBoxId(int id) {
+        this.cbId = id;
+        return this;
+    }
+
 
     /**
      * Get supported file icon to display
@@ -108,9 +130,9 @@ public class FileAdapter extends BaseRecyclerArrayAdapter<File> {
 
         public ViewHolder(View itemView, OnViewHolderClickListener onViewHolderClickListener) {
             super(itemView, onViewHolderClickListener);
-            tvName = (TextView) itemView.findViewById(R.id.tvName);
-            imageView = (ImageView) itemView.findViewById(R.id.ivImage);
-            checkBox = (CheckBox) itemView.findViewById(R.id.checkbox);
+            tvName = (TextView) itemView.findViewById(tvNameId);
+            imageView = (ImageView) itemView.findViewById(ivIconId);
+            checkBox = (CheckBox) itemView.findViewById(cbId);
         }
 
         @Override
