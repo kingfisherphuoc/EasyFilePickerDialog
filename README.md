@@ -1,12 +1,12 @@
 # Easy File/Folder Picker Dialog Fragment
 An easy file / folder picker dialog fragment which is easily to implement. Nothing special is required, you just need to add few lines of code!!
 
-![Sample Image](https://cloud.githubusercontent.com/assets/962484/26396277/ee1c9c60-409c-11e7-9354-7112f7032f79.png) ![Image2](https://cloud.githubusercontent.com/assets/962484/26397011/1b43c6a8-409f-11e7-886d-b3fde933d991.png)
+![Sample Image](https://cloud.githubusercontent.com/assets/962484/26396277/ee1c9c60-409c-11e7-9354-7112f7032f79.png) ![Image2](https://cloud.githubusercontent.com/assets/962484/26397011/1b43c6a8-409f-11e7-886d-b3fde933d991.png) ![Image3](https://user-images.githubusercontent.com/962484/28301275-9f3c2b04-6baf-11e7-821e-20ff856d6178.png)
 
 ### Installing
 Use Gradle:
 ```gradle
-compile 'com.kingfisherphuoc:easy-file-folder-picker-dialog:1.3'
+compile 'com.kingfisherphuoc:easy-file-folder-picker-dialog:1.4'
 ```
 ### How to use?
 Look at this code below? Is this easy? Nothing special is require. 
@@ -40,6 +40,102 @@ new FilePickerDialogFragment.Builder()
                 .build()
                 .show(getSupportFragmentManager(), null);
 ```
+<br>You can even customize everything in the dialog. Look at the exapmle `MyExampleCustomDialog` as below. Some properties are optional (like current folder path, toolbar, done button...).
+```java
+public class MyExampleCustomDialog extends BaseFilePickerDialogFragment {
+    @NonNull
+    @Override
+    protected int getLayoutId() {
+        return R.layout.dialog_custom;
+    }
+
+    @NonNull
+    @Override
+    protected int getRecyclerViewId() {
+        return R.id.recyclerview;
+    }
+
+    @Nullable
+    @Override
+    protected int getTextViewCurrentFolderId() {
+        return 0;
+    }
+
+    @Override
+    protected int getToolbarId() {
+        return R.id.myToolBar;
+    }
+
+    @Nullable
+    @Override
+    protected int getDoneButtonId() {
+        return 0;
+    }
+
+    @NonNull
+    @Override
+    protected int getLayoutRowId() {
+        return R.layout.item_row;
+    }
+
+    @NonNull
+    @Override
+    protected int getImageViewIconId() {
+        return R.id.ivImage;
+    }
+
+    @NonNull
+    @Override
+    protected int getTextViewNameId() {
+        return R.id.tvName;
+    }
+
+    @NonNull
+    @Override
+    protected int getCheckBoxId() {
+        return R.id.checkbox;
+    }
+
+
+    @Override
+    protected RecyclerView.LayoutManager getInitialLayoutManager() {
+        return new GridLayoutManager(getContext(), 3);
+    }
+
+
+    @Override
+    protected void initView(View view) {
+        super.initView(view);
+        toolbar.inflateMenu(R.menu.menu_custom_dialog);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.actionDone:
+                        doneSelecting();//supported function to passed result to listener
+                        break;
+                    case R.id.actionList:
+                        changeLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                        break;
+                    case R.id.actionGrid:
+                        changeLayoutManager(new GridLayoutManager(getContext(), 3));
+                        break;
+                }
+
+                return false;
+            }
+        });
+    }
+
+    public static MyExampleCustomDialog newInstance(FilePickerDialogFragment.OnFilesSelectedListener onFilesSelectedListener, DialogConfig dialogConfig) {
+        MyExampleCustomDialog myExampleCustomDialog = new MyExampleCustomDialog();
+        myExampleCustomDialog.onFilesSelectedListener = onFilesSelectedListener;
+        myExampleCustomDialog.dialogConfig = dialogConfig;
+        return myExampleCustomDialog;
+    }
+}
+```
+
 ### What's in the next version?
 If I have free time, I will make this dialog more customizable:
 1. Customizable dialog theme
